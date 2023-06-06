@@ -6,8 +6,11 @@ const connection = require('./connection');
 // Função responsável por buscar as tasks no banco de dados:
 const getAll = async () => {
     const tasks = await connection.execute('SELECT * FROM tasks');
-    return tasks;
+    return tasks[0];
 };
+
+// Função para cadastrar uma nova tarefa no banco:
+
 
 module.exports = {
     getAll
