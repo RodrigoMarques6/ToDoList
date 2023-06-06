@@ -14,9 +14,22 @@ const createTask = async (task) => {
     // Abaixo nós vamos receber somente o título da task, então estamos passando o "title".
     const { title } = task;
 
+    const dateUTC = new Date(Date.now()).toUTCString();
+
+    // O código acima: Temos um obj new Date, passamos como parâmetro o date.now que retorna a quantidade em milisegundos desde o ano de 1970 (e aí a gente consegue gerar a data atual através do Date.now), e após nós usamos a função toUTCString para gerar a data em formato UTC;
+    // Após isso, vou passar essa constante no createTask
+
     // Abaixo vamos escrever algo para inserir no banco:
-    const createTask = await connection.execute('INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)', [1, 2, 3])
+
+    const query = 'INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)';
+    
+    const createTask = await connection.execute(query, [title, 'pendente', 'dateUTC']);
     // As interrogações são a quantidade de informações, ou seja, cada uma recebe uma informação. Os valores do array são para cada interrogação.
+    // Basicamente o array vai salvar tittle, status e created_at
+
+    // A data salva no banco é em formato UTC.
+
+    return createdTask[0];
 }
 
 module.exports = {

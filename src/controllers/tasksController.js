@@ -9,10 +9,15 @@ const getAll = async (req, res) => {
     return res.status(200).json(tasks);
 };
 
+const createTask = async (req, res) => {
+    const createdTask = await tasksModel.createTask();
+}
+
 // Explicando a situação: Vamos fazer uma requisição pra API, vai cair no router (na rota),após o getAll vai ser executado e por sua vez, executará o código que está armazenado na função getAll no arquivos tasksController.
 
 module.exports = {
-    getAll
+    getAll,
+    createTask,
 };
 
 // Agora vamos importar essa função lá no router
