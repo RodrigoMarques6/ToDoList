@@ -1,2 +1,5 @@
-todolist/node_modules
+# Ignore a pasta node_modules
+node_modules
+
+# Ignore os arquivos relacionados ao API
 .env
