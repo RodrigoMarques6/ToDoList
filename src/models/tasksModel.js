@@ -23,15 +23,19 @@ const createTask = async (task) => {
 
     const query = 'INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)';
     
-    const createTask = await connection.execute(query, [title, 'pendente', 'dateUTC']);
+    const [createdTask] = await connection.execute(query, [title, 'pendente', 'dateUTC']);
     // As interrogações são a quantidade de informações, ou seja, cada uma recebe uma informação. Os valores do array são para cada interrogação.
     // Basicamente o array vai salvar tittle, status e created_at
 
     // A data salva no banco é em formato UTC.
 
-    return createdTask[0];
+    // return createdTask[0];
+    // Vamos modificar o retormo para retornar somente o insertID:
+
+    return {insertId: createdTask.insertId};
 }
 
 module.exports = {
-    getAll
+    getAll, 
+    createTask,
 };
