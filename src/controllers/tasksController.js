@@ -20,9 +20,19 @@ const createTask = async (req, res) => {
 
 // Explicando a situação: Vamos fazer uma requisição pra API, vai cair no router (na rota),após o getAll vai ser executado e por sua vez, executará o código que está armazenado na função getAll no arquivos tasksController.
 
+const deleteTask = async (req, res) => {
+    const { id } = req.params;
+    // O código acima significa que estou retirando alguma coisa dos parâmetros da minha requisição. Nesse caso, é um ID
+
+    await tasksModel.deleteTask(id);
+    return res.status(204).json(deleteTask);
+    // Status 204 significa que a requisição correu bem, mas não há corpo ou resposta para ela
+}
+
 module.exports = {
     getAll,
     createTask,
+    deleteTask,
 };
 
 // Agora vamos importar essa função lá no router

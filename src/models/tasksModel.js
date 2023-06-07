@@ -35,7 +35,14 @@ const createTask = async (task) => {
     return {insertId: createdTask.insertId};
 }
 
+const deleteTask = async (id) => {
+    // Porque passamos um id na função? porque preciso saber qual é a tarefa que será deletada, e isso é resolvido com o id.
+    const removedTask = await connection.execute('DELETE FROM tasks WHERE id = ?', [id]);
+    return removedTask;
+}
+
 module.exports = {
     getAll, 
     createTask,
+    deleteTask,
 };
