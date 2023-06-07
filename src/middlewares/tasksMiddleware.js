@@ -21,4 +21,4 @@ module.exports = {
     validateBody,
 };
 
-// Essa função "validadeBody" serve para validar o corpo da nossa requisição, isto é, se o front realmente vai nos enviar o dado passando corretamente. Ex.: Se a gente espera um title, então vamos validar se o front está enviado realmente um title ou não.
+// Essa função "validadeBody" serve para validar o corpo da nossa requisição, isto é, se o front realmente vai nos enviar o dado passando corretamente. Ex.: Se a gente espera um title, então vamos validar se o front está enviado realmente um title ou não..
