@@ -23,7 +23,7 @@ const createTask = async (task) => {
 
     const query = 'INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)';
     
-    const [createdTask] = await connection.execute(query, [title, 'pendente', 'dateUTC']);
+    const [createdTask] = await connection.execute(query, [title, 'pendente', dateUTC]);
     // As interrogações são a quantidade de informações, ou seja, cada uma recebe uma informação. Os valores do array são para cada interrogação.
     // Basicamente o array vai salvar tittle, status e created_at
 
