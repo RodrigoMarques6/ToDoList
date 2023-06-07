@@ -35,7 +35,7 @@ const updateTask = async (req, res) => {
 
     await tasksModel.updateTask(id, req.body);
     return res.status(204).json()
-    // Passamos um json vazio porque não há que retornar nenhum conteúdo nesse caso, assim como na parte de deletar..
+    // Passamos um json vazio porque não há que retornar nenhum conteúdo nesse caso, assim como na parte de deletar.
 };
 
 
