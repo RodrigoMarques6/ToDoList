@@ -33,16 +33,27 @@ const createTask = async (task) => {
     // Vamos modificar o retormo para retornar somente o insertID:
 
     return {insertId: createdTask.insertId};
-}
+};
 
 const deleteTask = async (id) => {
     // Porque passamos um id na função? porque preciso saber qual é a tarefa que será deletada, e isso é resolvido com o id.
     const removedTask = await connection.execute('DELETE FROM tasks WHERE id = ?', [id]);
     return removedTask;
+};
+
+const updateTask = async (id, task) => {
+    // Nesse caso eu também vou receber um ID, pois preciso saber qual é a task que preciso atualizar. Além disso, preciso receber os dados da task para conseguir atualizar (passamos id, task).
+
+    const { title, status} = task;
+    // No código acima eu estou retirando o title e o status das tasks para conseguir atualizar
+
+    const [updatedTask] = await connection.execute('UPDATE tasks SET title = ?, status = ? WHERE id = ?', [title, status, id]);
+    // Estou setando um novo título e um novo status para a task no banco
 }
 
 module.exports = {
     getAll, 
     createTask,
     deleteTask,
+    updateTask,
 };

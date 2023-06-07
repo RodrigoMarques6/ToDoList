@@ -25,14 +25,25 @@ const deleteTask = async (req, res) => {
     // O código acima significa que estou retirando alguma coisa dos parâmetros da minha requisição. Nesse caso, é um ID
 
     await tasksModel.deleteTask(id);
-    return res.status(204).json(deleteTask);
+    return res.status(204).json();
     // Status 204 significa que a requisição correu bem, mas não há corpo ou resposta para ela
 }
+
+const updateTask = async (req, res) => {
+    // Vou precisar do parâmetro ID:
+    const { id } = req.params;
+
+    await tasksModel.updateTask(id, req.body);
+    return res.status(204).json()
+    // Passamos um json vazio porque não há que retornar nenhum conteúdo nesse caso, assim como na parte de deletar.
+};
+
 
 module.exports = {
     getAll,
     createTask,
     deleteTask,
+    updateTask,
 };
 
 // Agora vamos importar essa função lá no router

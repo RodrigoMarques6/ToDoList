@@ -27,4 +27,6 @@ router.delete('/tasks/:id', tasksController.deleteTask);
 // No código acima, o id foi passado com dois pontos para significar que ele é variável, ou seja, eu posso recuperar o que foi passado no controller.
 // Passamos a função de deletar task para funcionar
 
+router.put('/tasks/:id', tasksController.updateTask);
+
 module.exports = router;
