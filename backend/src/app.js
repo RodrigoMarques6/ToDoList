@@ -11,6 +11,6 @@ app.use(router);
 // Acima explica que o nosso app vai sempre utilizar o nosso router
 
 // Vamos colocar para o cors ser utilizado pela aplicação:
-app.use(cors)
+app.use(cors());
 
 module.exports = app;
