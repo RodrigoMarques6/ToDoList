@@ -2,11 +2,13 @@
 // Todas as rotas estarão aqui
 
 const express = require('express');
+// Importanto o controller:
+const tasksController = require('./controller/tasksController')
 
 const router = express.Router();
 
 // Rota para retornar um array com os itens do banco de dados:
-router.get('/tasks', (req, res) => res.status(200).send('Olá mundo!!!!'));
+router.get('/tasks', tasksController.getAll);
 
 module.exports = router;
 
