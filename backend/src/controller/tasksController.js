@@ -1,4 +1,4 @@
-// Vamos importar toda a taskModel para ser utilizada aqui e conseguir retornar um array lá no front:
+// Vamos importar toda a taskModel para ser utilizada aqui e conseguir retornar um array lá no front::
 
 const tasksModel = require('../models/tasksModel');
 
