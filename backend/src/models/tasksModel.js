@@ -1,7 +1,7 @@
 // Arquivo para se conectar com o banco de dados;
 // Supondo que aqui tivesse login, entao trataríamos a parte de usuários em outro arquivo dentro da models.
 
-const connection = require('./connection')
+const connection = require('./connection');
 
 const getAll = async () => {
     // Função para retornar as tasks do banco de dados:
