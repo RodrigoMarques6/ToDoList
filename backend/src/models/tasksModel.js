@@ -43,10 +43,19 @@ const deleteTask = async (id) => {
     return removedTask;
 }
 
+const updateTask = async (id, task) => {
+    const {title, status} = task;
+    const query = 'UPDATE tasks SET title = ?, status = ? WHERE id = ?';
+    
+    const updatedTask = await connection.execute(query, [title, status, id])
+    return updatedTask;
+}
+
 // Exportando um objeto que dentro terá as funções que serão exportadas. Somente a título de organização.
 
 module.exports = {
     getAll,
     createTask,
-    deleteTask
+    deleteTask, 
+    updateTask,
 }

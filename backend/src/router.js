@@ -10,8 +10,9 @@ const tasksMiddleware = require('./middleware/tasksMiddleware');
 // Rota para retornar um array com os itens do banco de dados:
 router.get('/tasks', tasksController.getAll);
 router.get('/tasks2', (req, res) => res.send('Estou na rota tasks2'));
-router.post('/tasks', tasksMiddleware.validadeBody, tasksController.createTask);
+router.post('/tasks', tasksMiddleware.validateTitle, tasksController.createTask);
 router.delete('/tasks/:id', tasksController.deleteTask);
+router.put('/tasks/:id', tasksMiddleware.validateTitle, tasksMiddleware.validadeStatus, tasksController.updateTask);
 
 module.exports = router;
 // Passamos a validação da middleware na rota post antes da execução do createTask
