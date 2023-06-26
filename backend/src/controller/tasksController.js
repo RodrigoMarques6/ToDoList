@@ -15,8 +15,8 @@ const getAll = async (req, res) => {
 };
 
 const createTask = async (req, res) => {
-    // const createdTask = await tasksModel.createTasks();
-    return res.status(201).json(req.body)
+    const createdTask = await tasksModel.createTask(req.body);
+    return res.status(201).json(createdTask);
 }
 
 // Exportanto a função que retorna algo no front para ser utilizado publicamente no arquivo de código:

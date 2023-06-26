@@ -12,7 +12,7 @@ const getAll = async () => {
 
 // Função responsável por cadastrar uma nova tarefa no banco de dados:
 
-const createTasks = async (tasks) => {
+const createTask = async (task) => {
     // No parâmetro, nós estamos recebendo "tasks"
 
     // Código abaixo: "De dentro da task recebida, quero retirar algo. Nesse caso é o title."
@@ -34,12 +34,12 @@ const createTasks = async (tasks) => {
     const [createdTask] = await connection.execute(query, [title, 'pendente', dateUTC]);
     // Passamos o "pendente" porque cada task que for criada no todolist estará pendente no início, isto é, passamos de forma manual. Poderíamos também receber o status no lugar do "pendente" de forma manual. 
     // Entre colchetes para retornar sempre o primeiro array
-    return createTasks;
+    return {insertID: createdTask.insertId};
 }
 
 // Exportando um objeto que dentro terá as funções que serão exportadas. Somente a título de organização.
 
 module.exports = {
     getAll,
-    createTasks
+    createTask
 }
