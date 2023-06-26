@@ -14,10 +14,16 @@ const getAll = async (req, res) => {
     return res.status(200).json(tasks)
 };
 
+const createTask = async (req, res) => {
+    // const createdTask = await tasksModel.createTasks();
+    return res.status(201).json(req.body)
+}
+
 // Exportanto a função que retorna algo no front para ser utilizado publicamente no arquivo de código:
 
 module.exports = {
-    getAll
+    getAll,
+    createTask
 };
 
 // Em resumo: A função getAll que é a midleware que está sendo chamada no router vai utilizar a função getAll da model para trazer os dados do banco através da tasksModel, armazenar a const tasks e vai enviar(retornar) as tasks como resposta lá no front através do "return(tasks)"

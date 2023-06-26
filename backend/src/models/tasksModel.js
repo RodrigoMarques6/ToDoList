@@ -10,6 +10,8 @@ const getAll = async () => {
     // Após aqui, vamos no router para criar efetivamente a nossa rota
 };
 
+// Função responsável por cadastrar uma nova tarefa no banco de dados:
+
 const createTasks = async (tasks) => {
     // No parâmetro, nós estamos recebendo "tasks"
 
@@ -17,15 +19,22 @@ const createTasks = async (tasks) => {
     const { title } = task;
 
     // const createdTask = await connection.execute('INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)', [1, 2, 3])
-// Para a parte acima comentada:
+    // Para a parte acima comentada:
     // cada interrogação representa um dos valores listados anteriormente (title, status e created_at);
     // Passamos um array para que cada valor seja pra um
+
+    // Explicando o código a seguir: parâmetro Date.now passado para o objeto new Date para gerar a data atual e o toUTCString para gerar uma string da data em formato UTC
+    const dateUTC = new Date(Date.now()).toUTCString();
+
     // Agora vamos representar de outra forma, somente pra melhorar a visualização passando uma query:
 
     const query = 'INSERT INTO tasks(title, status, created_at) VALUES (?, ?, ?)';
+    // Cada interrogação nesse caso representará um dos valores acima.
 
-    const createdTask = await connection.execute(query, [title, 'pendente', 'data aqui']);
-    // Passamos o "pendente" porque cada task que for criada no todolist estará pendente no início.
+    const [createdTask] = await connection.execute(query, [title, 'pendente', dateUTC]);
+    // Passamos o "pendente" porque cada task que for criada no todolist estará pendente no início, isto é, passamos de forma manual. Poderíamos também receber o status no lugar do "pendente" de forma manual. 
+    // Entre colchetes para retornar sempre o primeiro array
+    return createTasks;
 }
 
 // Exportando um objeto que dentro terá as funções que serão exportadas. Somente a título de organização.

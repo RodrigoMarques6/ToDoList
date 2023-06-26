@@ -3,6 +3,9 @@ const router = require('./router');
 
 const app = express();
 
+// Função para a API trabalhar com dados em json
+app.use(express.json());
+
 // Dizendo para o app usar sempre o router
 app.use(router);
 
