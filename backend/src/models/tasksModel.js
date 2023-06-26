@@ -37,9 +37,16 @@ const createTask = async (task) => {
     return {insertID: createdTask.insertId};
 }
 
+const deleteTask = async (id) => {
+    // Recebemos o ID por parâmetro porque precisamos saber qual é a task que queremos excluir.
+    const removedTask = await connection.execute('DELETE FROM tasks WHERE id = ? ',[id]);
+    return removedTask;
+}
+
 // Exportando um objeto que dentro terá as funções que serão exportadas. Somente a título de organização.
 
 module.exports = {
     getAll,
-    createTask
+    createTask,
+    deleteTask
 }
