@@ -10,9 +10,19 @@ const fetchTasks = async () => {
 const tbody = document.querySelector('tbody');
 
 // Função que cria elementos HTML:
-const createElement = (tag, innerText = '') => {
+const createElement = (tag, innerText = '', innerHTML = '') => {
     const element = document.createElement(tag);
-    element.innerText = innerText;
+
+// Tendo em vista só podermos ter um innerText ou um innerHTML na mesma função, do contrário não funcionaria bem, então vamos passar aqui uma condição:
+    if (innerText) {
+        element.innerText = innerText;
+    }
+
+    if (innerHTML) {
+        element.innerHTML = innerHTML;
+    }
+
+// Após a condição, vamos no editButton e passamos o texto do span, ou seja, do button como terceiro parâmetro e não como segundo, e no segundo parâmetro nós passaremos como vazio.
     return element;
 }
 
@@ -38,6 +48,17 @@ const createRow = (task) => {
     const tdCreatedAt = createElement('td', created_at); 
 
     // Agora precisamos além de criar um "td", precisamos criar um select e também option. No caso, são 3 selects e 3 options.
+    // Vamos criar primeiro o td
+
+    const tdStatus = createElement('td');
+    const tdActions = createElement('td');
+
+    // Vamos criar o elemento botão:
+    // Passamos o span do botão:
+    const editButton = createElement('button', '', '<span class="material-symbols-outlined">edit</span>');
+
+    // tr.appendChild(editButton);
+    // tbody.appendChild(tr);
 }
 
 // createRow(task)
