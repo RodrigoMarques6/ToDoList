@@ -26,6 +26,17 @@ const createElement = (tag, innerText = '', innerHTML = '') => {
     return element;
 }
 
+const createSelect = () => {
+    // Vamos copiar as options do HTML para cá:
+    const options = `
+    <option value="Pendente">Pendente</option>
+    <option value="Em andamento">Em andamento</option>
+    <option value="Concluída">Concluída</option>`
+    const select = createElement('select', '', options);
+    return select;
+    
+}
+
 const task = {
     id: 1, 
     title: 'Testando Task',
@@ -53,12 +64,38 @@ const createRow = (task) => {
     const tdStatus = createElement('td');
     const tdActions = createElement('td');
 
+    // Vamos criar nosso select:
+
+    const select = createSelect();
+
     // Vamos criar o elemento botão:
     // Passamos o span do botão:
     const editButton = createElement('button', '', '<span class="material-symbols-outlined">edit</span>');
 
-    // tr.appendChild(editButton);
-    // tbody.appendChild(tr);
+    const deleteButton = createElement('button', '', '<span class="material-symbols-outlined">delete</span>');
+
+    // Adicionando a classe dos botões aqui no JS:
+
+    editButton.classList.add('btn-action');
+    deleteButton.classList.add('btn-action');
+
+    // Vamos tratar o select abaixo:
+
+    tdStatus.appendChild(select)
+
+    // Agora vamos adicionar os botões na td:
+
+    tdActions.appendChild(editButton);
+    tdActions.appendChild(deleteButton);
+
+    // Vamos colocar a td de título na tr:
+    tr.appendChild(tdTitle);
+    tr.appendChild(tdCreatedAt);
+    tr.appendChild(tdStatus);
+    tr.appendChild(tdActions);
+
+    
+    tbody.appendChild(tr);
 }
 
-// createRow(task)
+createRow(task)
