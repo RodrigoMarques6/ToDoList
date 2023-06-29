@@ -1,4 +1,10 @@
+const tbody = document.querySelector('tbody');
+const addForm = document.querySelector('.add-form');
+const inputTask = document.querySelector('.input-task');
+
 // Função para buscar as tasks no servidor (lembrar que é sempre uma função assíncrona, tendo em vista não sabermos quanto tempo vai levar para realizar a busca)
+
+
 
 const fetchTasks = async () => {
     const response = await fetch('http://localhost:3333/tasks');
@@ -7,7 +13,26 @@ const fetchTasks = async () => {
     return tasks;
 };
 
-const tbody = document.querySelector('tbody');
+// Função para adicionar tarefas no banco utilizando a API:
+
+const addTask = async (event) => {
+    event.preventDefault();
+
+    const task = { title: inputTask.value };
+    // Vamos fazer uma requisição ao banco de dados para o endpoint criado:
+
+     await fetch('http://localhost:3333/tasks',{ 
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        // Vamos passar uma string no formato de um objeto:
+        body: JSON.stringify(task), 
+    });
+     // Adicionamos após o endpoint o método da requisição para que não seja utilizado o padrão que é o get.
+
+     loadTasks();
+}
+
+
 
 // Função que cria elementos HTML:
 const createElement = (tag, innerText = '', innerHTML = '') => {
@@ -99,6 +124,7 @@ const createRow = (task) => {
 const loadTasks = async () => {
     // Utilizando a função que já existe no código para buscar as tasks no banco:
     const tasks = await fetchTasks();
+
     // Precisamos percorrer o array de tarefas e montar as tarefas pra exibir na tela:
     tasks.forEach((task) => {
         // Criando uma tr como consta lá no HTML. A função createRow espera uma task, portanto, vamos passar a task como parâmetro
@@ -107,5 +133,7 @@ const loadTasks = async () => {
         tbody.appendChild(tr);
     });
 }
+
+addForm.addEventListener('submit', addTask);
 
 loadTasks();
