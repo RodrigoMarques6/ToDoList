@@ -26,22 +26,18 @@ const createElement = (tag, innerText = '', innerHTML = '') => {
     return element;
 }
 
-const createSelect = () => {
+const createSelect = (value) => {
     // Vamos copiar as options do HTML para cá:
     const options = `
     <option value="Pendente">Pendente</option>
     <option value="Em andamento">Em andamento</option>
     <option value="Concluída">Concluída</option>`
     const select = createElement('select', '', options);
+
+    select.value = value
+
     return select;
     
-}
-
-const task = {
-    id: 1, 
-    title: 'Testando Task',
-    created_at: '20 de Janeiro de 2023',
-    status: 'Pendente'
 }
 
 // Função que cria uma linha e passa uma task como parâmetro para preencher lá no front
@@ -66,7 +62,7 @@ const createRow = (task) => {
 
     // Vamos criar nosso select:
 
-    const select = createSelect();
+    const select = createSelect(status);
 
     // Vamos criar o elemento botão:
     // Passamos o span do botão:
@@ -95,7 +91,21 @@ const createRow = (task) => {
     tr.appendChild(tdActions);
 
     
-    tbody.appendChild(tr);
+    return tr;
 }
 
-createRow(task)
+// Função responsável por buscar no banco as tasks:
+
+const loadTasks = async () => {
+    // Utilizando a função que já existe no código para buscar as tasks no banco:
+    const tasks = await fetchTasks();
+    // Precisamos percorrer o array de tarefas e montar as tarefas pra exibir na tela:
+    tasks.forEach((task) => {
+        // Criando uma tr como consta lá no HTML. A função createRow espera uma task, portanto, vamos passar a task como parâmetro
+        const tr = createRow(task);
+        // Vamos agora mostrar na tela:
+        tbody.appendChild(tr);
+    });
+}
+
+loadTasks();
